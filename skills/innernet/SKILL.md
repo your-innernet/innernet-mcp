@@ -37,8 +37,25 @@ Never pull full bodies you will not use. Let innernet drive retrieval.
   how or when they work, a standing instruction): `innernet_self_capture`, and mention
   briefly that you noted it. If the user would rather it not be kept, do not save it.
   Several captures piled up → `innernet_self_sync` folds them into facts.
-  Personalising tone or defaults would help → read `innernet_self_facts`.
+  Personalising tone or defaults would help → read `innernet_self_facts`. Each fact
+  says how it rests on what was said (`voice`): "said" is the user's own words,
+  "reported" an AI's note of what they said or did, "inferred" innernet's reading.
+  Speak for the user, or quote them, only from "said".
 - Unsure whether it is about the user or a project: `innernet_triage` routes it.
+
+## who said it
+
+innernet keeps the user's words apart from yours, so it never tells them "you said"
+about something an AI wrote.
+
+- What you write in `content` is kept as your note: what you saw, did or suggested,
+  in your own voice. Never write your own work as the user's ("I removed the blur
+  from the header" is yours, not theirs), and a proposal of yours is not their
+  decision until they say so.
+- When the note is about something the user said, decided, prefers or is, also pass
+  their exact words, copied from their message, in `user_words` (on `innernet_capture`,
+  `innernet_self_capture` and `innernet_triage`). Only those are kept as theirs, so
+  never put a summary or a paraphrase there.
 
 ## tasks
 
@@ -52,7 +69,6 @@ list tracks, complete it; when they commit to something new, add it.
   and say in a few words what you saved and where, so the user always knows.
 - Surface a relevant memory when it helps. Flag anything that looks stale or
   contradicted instead of asserting it.
-- Write in the user's own words where you have them.
 - If innernet asks for authentication, the user signs in in their browser through
   the plugin's connection. Never ask them to paste an API key or token into the chat.
 

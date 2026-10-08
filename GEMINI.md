@@ -11,6 +11,9 @@ list. every AI tool they use reads and writes the same memory.
 - a decision worth keeping → `innernet_save_context`. when it replaces something,
   replace it in the body and add one dated line under `## history`.
 - something durable about the user → `innernet_self_capture`, and say you noted it.
+- who said it: what you save is kept as your note. when it is about something the user
+  said, decided or prefers, pass their exact words, copied from their message, in
+  `user_words`. only those are kept as theirs; never a summary there.
 - "where did I leave off?" → `innernet_handoff_read`; at the end → `innernet_handoff_write`.
 
 say in a few words what you saved. if innernet asks for sign-in, the user signs in

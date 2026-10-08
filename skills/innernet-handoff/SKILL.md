@@ -11,13 +11,13 @@ continues one started in Codex, Claude, or Cursor.
 ## at the start of a session
 
 1. `innernet_list_projects` → the slug (or use the one the user names).
-2. `innernet_handoff_read { slug }` and present it back to the user in chat, as
+2. `innernet_handoff_read { project_slug }` and present it back to the user in chat, as
    "where you left off" — do not read it silently. Then continue from there.
 3. If the note names open work, offer to pick it up.
 
 ## at the end of a session (or on "hand off" / "wrap up")
 
-1. `innernet_handoff_write { slug, content }` — rewrite the note with THIS session's
+1. `innernet_handoff_write { project_slug, document }` — rewrite the note with THIS session's
    working context: what shipped, what is next, gotchas. Keep the template header
    line; keep it short and scratch-like. Every write is kept in history, so nothing is lost.
 2. If the session changed what the project IS — a decision, a direction, a shipped
