@@ -18,6 +18,10 @@ memory, so what you save here is what their other tools see next.
 3. Answer a specific question from a slice, not the whole cabinet:
    `innernet_context { slug, intent }` with the user's ask verbatim returns the focus,
    its periphery, and `retrieval_advice` naming what to read next.
+   Every item carries a `ref` and a short `v`. On a later call in the same conversation, pass
+   what you already hold as `known: ["ref@v", ...]`: a section you hold unchanged comes back as
+   a one-line stub, an edited one comes back whole, and the room goes to sections you have not
+   seen. A small memory comes back whole on every call, so `known` matters most there.
    `innernet_get_dimension { project_slug, dimension_name }` expands one dimension in full.
 4. When the user asks what innernet knows in general, `search { query }` runs full-text
    search across every map, and `fetch { id }` returns one project whole.

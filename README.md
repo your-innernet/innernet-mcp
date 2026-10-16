@@ -83,6 +83,10 @@ try:
   tool call carries — a project name, your question, or the text you ask it to
   save — and innernet returns what your memory holds. nothing is read from
   Claude's own memory, chat history, or files.
+- inside innernet, a few model providers do work on what you saved: Anthropic writes and
+  folds, DeepInfra makes the embeddings retrieval uses, and TypeSafe's decision model,
+  reached through OpenRouter with zero data retention, picks which saved sections answer an
+  ask and sorts captures. the privacy policy names each one and what it sees.
 - saves are written to your innernet account, versioned, and visible on your
   dashboard; you can edit or delete any of it there. personal memory is gated
   by disclosure levels you set, and private facts are never returned to an AI.
