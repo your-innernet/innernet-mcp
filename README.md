@@ -17,8 +17,9 @@ skills that tell the assistant when and how to use it.
   you sign in once through innernet's own OAuth page in your browser.
 - **innernet skill** — find the project you're talking about, load it, answer
   from the part of the memory that matters, save decisions back, keep the
-  project's task list current, and remember durable things about you that you
-  choose to share.
+  project's task list current, read the rooms you share with other people, move
+  your memory in from this assistant or export all of it, and remember durable
+  things about you that you choose to share.
 - **innernet-handoff skill** — "where did I leave off?" at the start of a
   session, and a short handoff note at the end, so the next tool continues.
 
@@ -81,8 +82,9 @@ try:
   it is two markdown skills and one connector entry.
 - the only destination is innernet.live. Claude sends the connector what a
   tool call carries — a project name, your question, or the text you ask it to
-  save — and innernet returns what your memory holds. nothing is read from
-  Claude's own memory, chat history, or files.
+  save — and innernet returns what your memory holds. innernet never reads
+  Claude's own memory, chat history, or files. when you ask to bring your memory
+  over, Claude sends what it already knows about you, and you see what moved in.
 - inside innernet, a few model providers do work on what you saved: Anthropic writes and
   folds, DeepInfra makes the embeddings retrieval uses, and TypeSafe's decision model,
   reached through OpenRouter with zero data retention, picks which saved sections answer an
