@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "innernet",
+  "version": "1.4.0",
+  "description": "one memory for every AI tool. connects the hosted innernet memory over remote MCP with a one-time browser sign-in: load a project's context, answer from what was decided before, save new decisions back, and pick up where the last tool left off. the same memory Claude, ChatGPT, Cursor and Grok read and write.",
+  "author": {
+    "name": "innernet",
+    "email": "yours@innernet.live",
+    "url": "https://innernet.live"
+  },
+  "homepage": "https://innernet.live/docs/everywhere#hermes-agent",
+  "repository": "https://github.com/your-innernet/innernet-mcp",
+  "license": "MIT",
+  "keywords": ["memory", "context", "projects", "handoff", "mcp"]
+}

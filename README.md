@@ -54,6 +54,10 @@ and sign in.
 **grok · perplexity · le chat** — add a custom connector (grok.com/connectors,
 perplexity's plugins, le chat's connectors) and paste `https://innernet.live/api/mcp`.
 
+**hermes agent** — `hermes plugins install innernet` (the hermes plugin catalog),
+then add the server to `~/.hermes/config.yaml` with `auth: oauth` and run
+`hermes mcp login innernet` (see `hermes/README.md`).
+
 **openclaw**
 
 ```
@@ -90,6 +94,7 @@ try:
 | `.codex-plugin/` · `.agents/plugins/marketplace.json` | Codex · ChatGPT plugins |
 | `.cursor-plugin/` | Cursor marketplace · Grok Bot |
 | `gemini-extension.json` · `GEMINI.md` | Gemini CLI extensions |
+| `hermes/` | Hermes Agent plugin catalog (portable package: `plugin.json` · `mcp.json` · `skills/`) |
 | `server.json` | the official MCP registry |
 | `.mcp.json` · `skills/` | shared by all of them |
 
@@ -117,7 +122,9 @@ privacy policy — https://innernet.live/privacy · terms — https://innernet.l
 ## releasing
 
 every push to `main` is a new version for the plugin directories, so each one raises
-`version` in all four plugin manifests (claude, codex, cursor, gemini) together.
+`version` in all five plugin manifests (claude, codex, cursor, gemini, hermes) together.
+the hermes catalog pins an exact commit: after a release, bump `sha` in
+`plugin-catalog/innernet.yaml` on NousResearch/hermes-agent with a new PR.
 `python3 scripts/check.py` runs on every push: the manifests parse, the versions agree,
 every url is `https://innernet.live/api/mcp`, the listing fits each directory's caps,
 and the skills name only tools the live server serves.
