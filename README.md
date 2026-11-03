@@ -46,6 +46,25 @@ codex plugin add innernet@innernet
 
 **cursor** — install innernet from the cursor marketplace, or add this repo as a plugin.
 
+**grok bot** — grok bot installs plugins from the cursor marketplace, so the same
+listing is one press there. without it, ask your bot: *add the custom MCP server
+innernet at https://innernet.live/api/mcp*, press connect on the card it shows,
+and sign in.
+
+**grok · perplexity · le chat** — add a custom connector (grok.com/connectors,
+perplexity's plugins, le chat's connectors) and paste `https://innernet.live/api/mcp`.
+
+**hermes agent** — `hermes plugins install innernet` (the hermes plugin catalog),
+then add the server to `~/.hermes/config.yaml` with `auth: oauth` and run
+`hermes mcp login innernet` (see `hermes/README.md`).
+
+**openclaw**
+
+```
+openclaw mcp set innernet '{"url":"https://innernet.live/api/mcp","transport":"streamable-http","auth":"oauth"}'
+openclaw mcp login innernet
+```
+
 **gemini cli**
 
 ```
@@ -54,6 +73,8 @@ gemini extensions install https://github.com/your-innernet/innernet-mcp
 
 **any other MCP client** — add the remote server `https://innernet.live/api/mcp`.
 it is listed in the official MCP registry as `live.innernet/innernet`.
+
+every app, with the shortest way into each: https://innernet.live/docs/everywhere
 
 you need a free account at [innernet.live](https://innernet.live). never paste
 an api key into a chat — the sign-in handles it.
@@ -71,8 +92,9 @@ try:
 |---|---|
 | `.claude-plugin/` | Claude (directory, Claude Code marketplace) |
 | `.codex-plugin/` · `.agents/plugins/marketplace.json` | Codex · ChatGPT plugins |
-| `.cursor-plugin/` | Cursor marketplace |
+| `.cursor-plugin/` | Cursor marketplace · Grok Bot |
 | `gemini-extension.json` · `GEMINI.md` | Gemini CLI extensions |
+| `hermes/` | Hermes Agent plugin catalog (portable package: `plugin.json` · `mcp.json` · `skills/`) |
 | `server.json` | the official MCP registry |
 | `.mcp.json` · `skills/` | shared by all of them |
 
@@ -100,7 +122,9 @@ privacy policy — https://innernet.live/privacy · terms — https://innernet.l
 ## releasing
 
 every push to `main` is a new version for the plugin directories, so each one raises
-`version` in all four plugin manifests (claude, codex, cursor, gemini) together.
+`version` in all five plugin manifests (claude, codex, cursor, gemini, hermes) together.
+the hermes catalog pins an exact commit: after a release, bump `sha` in
+`plugin-catalog/innernet.yaml` on NousResearch/hermes-agent with a new PR.
 `python3 scripts/check.py` runs on every push: the manifests parse, the versions agree,
 every url is `https://innernet.live/api/mcp`, the listing fits each directory's caps,
 and the skills name only tools the live server serves.

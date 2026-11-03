@@ -85,6 +85,22 @@ plug = next((p for p in market.get("plugins", []) if p.get("name") == "innernet"
 if plug.get("source", {}).get("path") != "./" or not plug.get("policy", {}).get("authentication"):
     bad.append(".agents/plugins/marketplace.json: innernet must be listed at ./ with a policy")
 
+# the hermes agent package (plugin catalog, subdir hermes/): its own manifest, the
+# door as streamable-http, and the very same two skills as the root
+hermes = load("hermes/plugin.json")
+hmcp = load("hermes/mcp.json")
+if hermes.get("name") != "innernet":
+    bad.append("hermes/plugin.json: name must stay 'innernet'")
+if hermes.get("version") != versions["claude"]:
+    bad.append(f"hermes/plugin.json: version {hermes.get('version')} != {versions['claude']}")
+hentry = hmcp.get("mcpServers", {}).get("innernet", {})
+if hentry != {"type": "streamable-http", "url": URL} or set(hmcp) - {"$schema", "mcpServers"}:
+    bad.append(f"hermes/mcp.json: innernet must be {{type: streamable-http, url: {URL}}} and nothing else")
+for name in ["innernet", "innernet-handoff"]:
+    a, b = root / "skills" / name / "SKILL.md", root / "hermes" / "skills" / name / "SKILL.md"
+    if not b.is_file() or a.read_text() != b.read_text():
+        bad.append(f"hermes/skills/{name}/SKILL.md must be an exact copy of skills/{name}/SKILL.md")
+
 # skills
 skills = sorted(d for d in (root / "skills").iterdir() if d.is_dir())
 if {d.name for d in skills} < {"innernet", "innernet-handoff"}:
