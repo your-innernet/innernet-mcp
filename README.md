@@ -56,7 +56,9 @@ perplexity's plugins, le chat's connectors) and paste `https://innernet.live/api
 
 **hermes agent** — `hermes plugins install innernet` (the hermes plugin catalog),
 then add the server to `~/.hermes/config.yaml` with `auth: oauth` and run
-`hermes mcp login innernet` (see `hermes/README.md`).
+`hermes mcp login innernet`. the hermes package lives on the
+[`hermes` branch](https://github.com/your-innernet/innernet-mcp/tree/hermes/hermes),
+kept apart from `main` so the claude directory scans only the claude plugin.
 
 **openclaw**
 
@@ -94,7 +96,6 @@ try:
 | `.codex-plugin/` · `.agents/plugins/marketplace.json` | Codex · ChatGPT plugins |
 | `.cursor-plugin/` | Cursor marketplace · Grok Bot |
 | `gemini-extension.json` · `GEMINI.md` | Gemini CLI extensions |
-| `hermes/` | Hermes Agent plugin catalog (portable package: `plugin.json` · `mcp.json` · `skills/`) |
 | `server.json` | the official MCP registry |
 | `.mcp.json` · `skills/` | shared by all of them |
 
@@ -122,16 +123,19 @@ privacy policy — https://innernet.live/privacy · terms — https://innernet.l
 ## releasing
 
 every push to `main` is a new version for the plugin directories, so each one raises
-`version` in all five plugin manifests (claude, codex, cursor, gemini, hermes) together.
-the hermes catalog pins an exact commit: after a release, bump `sha` in
-`plugin-catalog/innernet.yaml` on NousResearch/hermes-agent with a new PR.
-`python3 scripts/check.py` runs on every push: the manifests parse, the versions agree,
+`version` in all four plugin manifests (claude, codex, cursor, gemini) together.
+the hermes package is released from the `hermes` branch (subdir `hermes/`, skills copied
+from `main`); the hermes catalog pins an exact commit, so after a hermes release bump `sha`
+in `plugin-catalog/innernet.yaml` on NousResearch/hermes-agent with a new PR.
+the checker lives on the `tools` branch, so this folder holds only what the claude
+directory accepts from an unverified org (markdown, text, json, yaml, png). ci runs
+`python3 .tools/check.py --root=.` on every push: the manifests parse, the versions agree,
 every url is `https://innernet.live/api/mcp`, the listing fits each directory's caps,
 and the skills name only tools the live server serves.
 
 `server.json` is the official MCP registry entry. its `version` follows the server's
 own `serverInfo.version`; when that moves, raise it here and run
-`./scripts/publish-registry.sh` (it signs in with the innernet.live domain key).
+`publish-registry.sh` from the `tools` branch in this checkout (it signs in with the innernet.live domain key).
 
 ## support
 
