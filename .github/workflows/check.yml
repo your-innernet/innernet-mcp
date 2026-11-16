@@ -10,4 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 scripts/check.py
+      # the checker lives on the tools branch, so the plugin folder holds only
+      # what the claude directory accepts (markdown, text, json, yaml, images)
+      - uses: actions/checkout@v4
+        with:
+          ref: tools
+          path: .tools
+      - run: python3 .tools/check.py --root=.
